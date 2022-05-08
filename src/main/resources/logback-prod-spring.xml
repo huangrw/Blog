@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <!--日志输出格式-->
+    <property name="pattern2" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss} %c %M %L %thread %m%n"></property>
+    <property name="colorPattern"
+              value="%yellow(%date{yyyy-MM-dd HH:mm:ss}) |%highlight(%-5level) |%blue(%thread) |%blue(%file:%line) |%green(%logger) |%cyan(%msg%n)"/>
+    <property name="filePattern"
+              value="%d{yyyy-MM-dd HH:mm:ss} |%-5level |%thread |%file:%line |%logger |%msg%n"/>
+
+
+    <!--日志文件输出路径-->
+    <property name="logDir" value="log\\log_dev"></property>
+
+
+    <!--切割日志文件 -->
+    <appender name="rollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${filePattern}</pattern>
+        </encoder>
+        <file>${logDir}/deviceOnline.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logDir}/deviceOnline.%d{yyyy-MM-dd}.log%i.gz</fileNamePattern>
+            <maxFileSize>2MB</maxFileSize>
+
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>Info</level>
+        </filter>
+    </appender>
+
+
+    <!--配置控制台的过滤器-->
+    <appender name="consoleFilterAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${colorPattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+
+    <root level="ALL">
+        <appender-ref ref="rollingFileAppender"></appender-ref>
+        <appender-ref ref="consoleFilterAppender"></appender-ref>
+    </root>
+
+
+
+</configuration>

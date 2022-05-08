@@ -1,0 +1,72 @@
+spring:
+  # rabbitMQ配置
+  rabbitmq:
+    host: 172.28.5.134
+    port: 5672
+    username: hrw
+    password: 123456
+    virtual-host: onlinedevice
+    queue: q_deviceonline
+    listener:
+      simple:
+        acknowledge-mode: none
+    # 设置MQ消费者线程数
+    currentConsumers: 1  #设置当前线程数(默认消费者线程数为1,当大于1时可能会导致数据错误)
+    maxConsumers: 5      #设置最大线程数
+
+
+# 存放服务器和设备在线数据的远程Redis
+onlinedevice-remoteredis:
+  database: 0   # Redis数据库索引（默认为0）
+  host: 172.28.5.52  # Redis服务器地址
+  port: 6379  # Redis服务器连接端口
+  password: 123456   # Redis服务器连接密码（默认为空）
+  timeout: 0  # 连接超时时间（毫秒）
+  max-active: 100  # 连接池最大活跃连接数
+  max-wait: 3000   # 连接池最大建立连接等待时间, 单位为ms, 如果超过此时间将抛出异常
+  max-idle: 20     # 连接池最大空闲连接数, 超过空闲数将被标记为不可用,然后被释放
+  min-idle: 0      # 连接池里始终应该保持的最小连接数
+
+
+
+# 存放在线设备上线次数: [time : [mac:次数]]
+onlinedevice-localredis:
+  database: 1   # Redis数据库索引（默认为0）
+  host: 127.0.0.1 # Redis服务器地址
+  port: 6379  # Redis服务器连接端口
+  password: redis
+  timeout: 0  # 连接超时时间（毫秒）
+  max-active: 100  # 连接池最大活跃连接数
+  max-wait: 3000   # 连接池最大建立连接等待时间, 单位为ms, 如果超过此时间将抛出异常
+  max-idle: 20     # 连接池最大空闲连接数, 超过空闲数将被标记为不可用,然后被释放
+  min-idle: 0      # 连接池里始终应该保持的最小连接数
+
+
+# 存放当前在线mac:  [devmac: mac](本地维护的在线设备)
+onlinedevicemac-localredis:
+  database: 3
+  # Redis数据库索引（默认为0）
+  host: 172.28.5.52 # Redis服务器地址
+  port: 6379  # Redis服务器连接端口
+  password: 123456
+  timeout: 0  # 连接超时时间（毫秒）
+  max-active: 100  # 连接池最大活跃连接数
+  max-wait: 3000   # 连接池最大建立连接等待时间, 单位为ms, 如果超过此时间将抛出异常
+  max-idle: 20     # 连接池最大空闲连接数, 超过空闲数将被标记为不可用,然后被释放
+  min-idle: 0      # 连接池里始终应该保持的最小连接数
+
+# Actuator配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 8582
+    servlet:
+      context-path: /
+    ssl:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always

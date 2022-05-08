@@ -1,0 +1,59 @@
+
+spring:
+  main:
+    web-application-type: servlet  # 是否以web形式启动 none:否  servlet:是
+  profiles:
+    active: dev   # 选择启动环境 : dev   test  prod
+  application:
+    name: SpringBootTemplate   # 项目名称
+
+
+
+
+logging:
+  config: classpath:logback-${spring.profiles.active}-spring.xml   # 跟随启动环境选择日志
+
+# Mybaits配置
+
+
+#mybatis-plus:
+#  #MyBatis Mapper 所对应的 XML 文件位置，如果您在 Mapper 中有自定义方法（XML 中有自定义实现），需要进行该配置，告诉 Mapper 所对应的 XML 文件位置。
+#  mapper-locations: classpath*:com/tnt/mapper/*.xml,classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
+#  #单独的 MyBatis 配置，请将其路径配置到 configLocation 中  注意 configuration与config-location不能一起用
+#  #config-location: classpath*:mybatis-config.xml
+#  # 实体对象的扫描包,MyBaits 别名包扫描路径，通过该属性可以给包中的类注册别名
+#  #type-aliases-package: com.tnt.entity.dto
+#  #枚举对象的扫描包
+#  #type-enums-package: com.song.druid.test.domain.enums
+#  configuration:
+#    # 禁用缓存
+#    cache-enabled: false
+#    #开启映射时驼峰命名
+#    map-underscore-to-camel-case: true
+#    #开启控制台 SQL 日志打印
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    auto-mapping-behavior: full
+#      #  global-config:
+#      #    db-config:
+#      #全局默认主键类型，设置后，即可省略实体对象中的@TableId(type = IdType.AUTO)配置
+#      #id-type: auto
+#    #表名前缀，全局配置后可省略 @TableName()配置。默认值：null
+#    #table-prefix: Blog
+
+
+mybatis:
+  mapper-locations: classpath*:com/tnt/mapper/*.xml,classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+actable:
+  database:
+    type: mysql
+  #index:
+    #prefix: 自己定义的索引前缀 # 该配置项不设置默认使用actable_idx_
+  model:
+    pack: com.tnt.entity.dto
+  table:
+    auto: create
+  #unique:
+    #prefix: 自己定义的唯一约束前缀#该配置项不设置默认使用actable_uni_
