@@ -3,7 +3,7 @@
 <mapper namespace="com.tnt.dao.TestDao">
 
     <select id="getUserInfo"  resultType="com.tnt.entity.dto.User">
-        select * from students
+        select * from user
     </select>
 
 

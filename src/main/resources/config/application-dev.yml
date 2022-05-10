@@ -24,7 +24,7 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 #建立新连接时将发送到JDBC驱动程序的连接属性。字符串的格式必须为[propertyName = property;] *注 - “用户”和“密码”属性将被明确传递，因此不需要在此处包含。
       # 要打开Druid监控页面需要做以下配置
       stat-view-servlet:
-        enabled: true # 这个一定要加，不然【http://localhost:8080/druid/index.html】页面打不开
+        enabled: false # 这个一定要加，不然【http://localhost:8080/druid/index.html】页面打不开
         url-pattern: '/druid/*'
         allow: 127.0.0.1
         #deny: 192.168.1.73
@@ -32,31 +32,27 @@ spring:
         login-password: 123456
         reset-enable: false
       web-stat-filter:
-        enabled: true # 这个一定要加，不然【http://localhost:8080/druid/index.html】页面打不开
+        enabled: false # 这个一定要加，不然【http://localhost:8080/druid/index.html】页面打不开
         url-pattern: '/*'
         exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
         session-stat-enable: true
 
-#  # rabbitMQ配置
-#  rabbitmq:
-#    host: 172.28.5.134
-#    port: 5672
-#    username: hrw
-#    password: 123456
-#    virtual-host: onlinedevice
-#    queue: q_deviceonline
-#    listener:
-#      simple:
-#        acknowledge-mode: none  # 确认方式  none:自动确认   auto:手动确认(根据侦听器检测是正常返回、还是抛出异常来发出 ack/nack)   manual:手动确认(需提供具体的确认方式)
-#    # 设置MQ消费者线程数
-#    currentConsumers: 1  #设置当前线程数(默认消费者线程数为1,当大于1时可能会导致数据错误)
-#    maxConsumers: 5      #设置最大线程数
+mybatis:
+  mapper-locations: classpath*:com/tnt/mapper/*.xml,classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
-# Mybaits配置
-#mybatis:
-#  mapper-locations: classpath:com/tnt/mapper/*.xml
-#  configuration:
-#    map-underscore-to-camel-case: true
+actable:
+  database:
+    type: mysql
+    #index:
+    #prefix: 自己定义的索引前缀 # 该配置项不设置默认使用actable_idx_
+  model:
+    pack: com.tnt.entity.dto
+  table:
+    auto: none
+    #unique:
+    #prefix: 自己定义的唯一约束前缀#该配置项不设置默认使用actable_uni_
 
 
 

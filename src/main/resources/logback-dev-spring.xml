@@ -10,7 +10,7 @@
 
 
     <!--日志文件输出路径-->
-    <property name="logDir" value="log\\log_dev"></property>
+    <property name="logDir" value="log/log_dev"></property>
 
 
     <!--切割日志文件 -->
@@ -18,9 +18,9 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${filePattern}</pattern>
         </encoder>
-        <file>${logDir}/deviceOnline.log</file>
+        <file>${logDir}/bolg_log_dev.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${logDir}/deviceOnline.%d{yyyy-MM-dd}.log%i.gz</fileNamePattern>
+            <fileNamePattern>${logDir}/bolg_log.%d{yyyy-MM-dd}.log%i.gz</fileNamePattern>
             <maxFileSize>2MB</maxFileSize>
 
             <!-- keep 30 days' worth of history capped at 3GB total size -->
