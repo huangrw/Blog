@@ -6,6 +6,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -16,14 +17,15 @@ import lombok.ToString;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Table
 public class BlogTagRealationship {
     @IsKey
     @IsAutoIncrement
-    private long id;
+    private Long id;
     @Column
     private long blogId;
     @Column
-    private long typeId;
+    private long tagId;
 }
