@@ -1,6 +1,4 @@
 package com.tnt.service.serviceImpl;
-
-import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.tnt.dao.TypeDao;
 import com.tnt.entity.dto.BlogType;
 import com.tnt.service.TypeService;

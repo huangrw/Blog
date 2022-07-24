@@ -1,8 +1,8 @@
 package com.tnt.dao;
-
-import com.tnt.entity.dto.Blog;
 import com.tnt.entity.vo.BlogInfo;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author huangrw
@@ -13,4 +13,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BlogDao {
     int insertBlog(BlogInfo blogInfo);
+
+    // 展示博客列表
+    //
+
+
+
 }

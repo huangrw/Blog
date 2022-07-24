@@ -8,7 +8,14 @@ import com.tnt.util.resultUtils.ResultCode;
 import com.tnt.util.resultUtils.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -43,4 +50,23 @@ public class UserController {
         return ResultUtils.failure(ResultCode.ERROR,"登录失败");
 
     }
+
+    @GetMapping("user/getUserInfo")
+    public Map<String, Object> getUserInfoById(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String name = authentication.getName();
+        Object credentials = authentication.getCredentials();
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        HashMap<String, Object> resultMap = new HashMap<String,Object>();
+        resultMap.put("username",name);
+        resultMap.put("凭证",credentials);
+        resultMap.put("权限",authorities);
+
+        return resultMap;
+
+
+    }
+
 }

@@ -7,6 +7,14 @@ spring:
   application:
     name: SpringBootTemplate   # 项目名称
 
+#  security:
+#    user:
+#      name: user
+#      password: user
+#      roles: admin,users
+knife4j:
+  production: false
+
 logging:
   config: classpath:logback-${spring.profiles.active}-spring.xml   # 跟随启动环境选择日志
 

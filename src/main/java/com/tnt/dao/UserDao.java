@@ -1,9 +1,12 @@
 package com.tnt.dao;
 
+import com.tnt.entity.dto.Role;
 import com.tnt.entity.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -16,6 +19,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao {
 
-    public User selectUserInfoByName(@Param("username")String username,@Param("password")String password);
+    User selectUserInfoByName(@Param("username")String username,@Param("password")String password);
+
+    User getUserByName(@Param("username")String username);
+
+    List<Role> getRolesById(@Param("uid")Integer uid);
 
 }

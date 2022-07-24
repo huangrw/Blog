@@ -6,5 +6,12 @@
         SELECT * FROM `user` WHERE username = #{username} and `password` = #{password}
     </select>
 
+    <select id="getUserByName" resultType="com.tnt.entity.dto.User">
+        SELECT * FROM `user` WHERE username = #{username}
+    </select>
+
+    <select id="getRolesById" resultType="com.tnt.entity.dto.Role">
+        select r.id,r.name,r.name_zh from role r,user_role ur where r.id = ur.rid and ur.uid = #{uid}
+    </select>
 
 </mapper>
